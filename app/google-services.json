@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "534146342581",
+    "project_id": "gincana-5b056",
+    "storage_bucket": "gincana-5b056.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:534146342581:android:328093fd7c4047e93f68fc",
+        "android_client_info": {
+          "package_name": "com.gincana"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "534146342581-5udkd7e3lnrr3oket950jcdv2m787d97.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkBhQ_b5pvozyC6MtzAv1NJRN1ps4pEXU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "534146342581-5udkd7e3lnrr3oket950jcdv2m787d97.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

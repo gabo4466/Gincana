@@ -1,4 +1,4 @@
-package com.example.gincana.ui.theme
+package com.gincana.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
