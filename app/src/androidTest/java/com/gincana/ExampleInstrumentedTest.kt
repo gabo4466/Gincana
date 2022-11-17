@@ -1,4 +1,4 @@
-package com.example.gincana
+package com.gincana
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

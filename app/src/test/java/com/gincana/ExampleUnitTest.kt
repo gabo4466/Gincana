@@ -1,4 +1,4 @@
-package com.example.gincana
+package com.gincana
 
 import org.junit.Test
 
