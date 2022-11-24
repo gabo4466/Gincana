@@ -25,6 +25,7 @@ import com.gincana.ui.theme.GincanaTheme
     @Composable
     fun AuthScreen(navController: NavController){
         Scaffold(modifier = Modifier.fillMaxSize()) {
+
             BodyContent(navController)
         }
     }

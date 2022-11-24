@@ -20,23 +20,24 @@ import com.gincana.ui.theme.GincanaTheme
 /*
 METHODS
  */
-    private fun registerFireBase(email: TextFieldValue, password: TextFieldValue) {
+   /* private fun registerFireBase(email: TextFieldValue, password: TextFieldValue) {
 
     }
-
+*/
     /*
     COMPOSABLESexample
      */
 
     @Composable
     fun LoginScreen(navController: NavController) {
+
         Box(
             modifier = Modifier.fillMaxSize()
         ) {
             Column {
 
                     Title("Inicio de sesión o registro",navController)
-                    SignUpForm()
+                    LoginForm()
             }
         }
     }
@@ -63,7 +64,7 @@ METHODS
     }
 
     @Composable
-    fun SignUpForm() {
+    fun LoginForm() {
         var email by remember { mutableStateOf(TextFieldValue("")) }
         var password by remember { mutableStateOf(TextFieldValue("")) }
         Column (
@@ -110,20 +111,20 @@ METHODS
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Button(
-                    onClick = {
-                        registerFireBase(email, password)
-                    }
-                ) {
-                    Text(
-                        text = "Registrar",
-                        style = MaterialTheme.typography.button
-                    )
-                }
+//                Button(
+//                    onClick = {
+//                        registerFireBase(email, password)
+//                    }
+//                ) {
+//                    Text(
+//                        text = "Registrar",
+//                        style = MaterialTheme.typography.button
+//                    )
+//                }
                 Button(
                     onClick = {
                         /*TODO*/
-                    }) {
+                    },modifier = Modifier.width(350.dp)) {
                     Text(
                         text = "Acceder",
                         style = MaterialTheme.typography.button
