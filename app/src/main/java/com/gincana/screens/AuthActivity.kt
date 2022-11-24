@@ -1,140 +1,100 @@
-package com.gincana
+package com.gincana.screens
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+
+
+import androidx.compose.foundation.Image
+
 import androidx.compose.foundation.layout.*
+
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.gincana.R
 import com.gincana.ui.theme.GincanaTheme
-import com.google.firebase.ktx.Firebase
 
 
 
-    /*
-    METHODS
-     */
-    private fun registerFireBase(email: TextFieldValue, password: TextFieldValue) {
-
+    @Composable
+    fun AuthScreen(navController: NavController){
+        Scaffold(modifier = Modifier.fillMaxSize()) {
+            BodyContent(navController)
+        }
     }
+
 
     /*
     COMPOSABLESexample
      */
 
     @Composable
-    fun AuthScreen(navController: NavController) {
-        Box(
-            modifier = Modifier.fillMaxSize()
-        ) {
-            Column {
+    fun BodyContent(navController: NavController) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.fillMaxSize()) {
 
-                    Title("Inicio de sesión o registro",navController)
-                    SignUpForm()
-            }
-        }
-    }
+            Spacer(modifier = Modifier.height(100.dp))
+            
+                Image(painter = painterResource(R.drawable.reuleta), contentDescription ="", modifier = Modifier
+                    .clip(shape = CircleShape)
+                    .size(300.dp))
 
-    @Composable
-    fun Title(title: String,navController: NavController) {
-        TopAppBar(
-          /*  modifier = Modifier
-                .fillMaxWidth()
-                .background(color = MaterialTheme.colors.primary)*/
-        ) {
 
-            Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Arrow Back", modifier = Modifier.clickable { navController.popBackStack() })
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(
-                text = title,
-                style = MaterialTheme.typography.h6,
-                color = MaterialTheme.colors.onPrimary,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.padding(10.dp)
-            )
+
+
+
+
+
+                Buttons(navController)
+            
 
         }
-    }
+
+
+   }
 
     @Composable
-    fun SignUpForm() {
-        var email by remember { mutableStateOf(TextFieldValue("")) }
-        var password by remember { mutableStateOf(TextFieldValue("")) }
-        Column (
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(top = 100.dp)
-        ) {
-            Row (
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                OutlinedTextField(
-                    value = email,
-                    onValueChange = { email = it },
-                    label = { Text(text = "Email")},
-                    /*CAMBIAR  COLORES*/
-                    colors = TextFieldDefaults.outlinedTextFieldColors(
-                        focusedBorderColor = Color.Magenta,
-                        unfocusedBorderColor = Color.Blue
-                    )
+    fun Buttons(navController: NavController) {
 
-                )
-            }
-            Spacer(modifier = Modifier.size(20.dp))
+        Column(modifier = Modifier.padding(bottom = 50.dp)) {
+
             Row(
                 horizontalArrangement = Arrangement.Center,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                OutlinedTextField(
-
-                    value = password,
-                    onValueChange = {password= it},
-                    label = { Text(text = "Password")},
-                    /*CAMBIAR COLORES*/
-                    colors = TextFieldDefaults.outlinedTextFieldColors(
-                        focusedBorderColor = Color.Magenta,
-                        unfocusedBorderColor = Color.Blue
-                    )
-
-                )
-            }
-            Spacer(modifier = Modifier.size(20.dp))
-            Row(
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Button(
-                    onClick = {
-                        registerFireBase(email, password)
-                    }
-                ) {
-                    Text(
-                        text = "Registrar",
-                        style = MaterialTheme.typography.button
-                    )
-                }
                 Button(
                     onClick = {
                         /*TODO*/
-                    }) {
+                        navController.navigate("login_screen")
+                    },
+                    modifier = Modifier.width(360.dp)
+                ) {
                     Text(
-                        text = "Acceder",
+                        text = "Iniciar Sesión",
+                        style = MaterialTheme.typography.button
+                    )
+                }
+            }
+
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Button(
+                    onClick = {
+                        /*TODO*/
+                    },
+                    modifier = Modifier.width(360.dp)
+                ) {
+                    Text(
+                        text = "Registrarse",
                         style = MaterialTheme.typography.button
                     )
                 }
@@ -142,8 +102,11 @@ import com.google.firebase.ktx.Firebase
         }
     }
 
+
+
     @Preview(showBackground = true)
     @Composable
+
     fun Preview() {
         GincanaTheme {
             // A surface container using the 'background' color from the theme
@@ -156,5 +119,4 @@ import com.google.firebase.ktx.Firebase
             }
         }
     }
-
 
