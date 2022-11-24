@@ -2,36 +2,32 @@ package com.gincana.screens
 
 
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+
 import androidx.compose.foundation.layout.*
+
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.gincana.R
 import com.gincana.ui.theme.GincanaTheme
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            GincanaTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    MainScreen()
-                }
-            }
+
+
+    @Composable
+    fun FirstScreen(navController: NavController){
+        Scaffold(modifier = Modifier.fillMaxSize()) {
+            BodyContent(navController)
         }
     }
-
 
 
     /*
@@ -39,24 +35,44 @@ class MainActivity : ComponentActivity() {
      */
 
     @Composable
-    fun MainScreen() {
-    Image(painter = painterResource(R.drawable.ic_launcher_foreground), contentDescription ="", modifier = Modifier.size(10.dp,10.dp))
+    fun BodyContent(navController: NavController) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.fillMaxSize()) {
 
-    Buttons()
+            Spacer(modifier = Modifier.height(100.dp))
+            
+                Image(painter = painterResource(R.drawable.reuleta), contentDescription ="", modifier = Modifier
+                    .clip(shape = CircleShape)
+                    .size(300.dp))
 
-    }
+
+
+
+
+
+
+                Buttons(navController)
+            
+
+        }
+
+
+   }
 
     @Composable
-    fun Buttons() {
-        Column(modifier = Modifier
-            .fillMaxSize()
-            .padding(top = 700.dp)) {
+    fun Buttons(navController: NavController) {
 
+        Column(modifier = Modifier.padding(bottom = 50.dp)) {
 
-            Row(horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxWidth()) {
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier.fillMaxWidth()
+            ) {
                 Button(
                     onClick = {
                         /*TODO*/
+                        navController.navigate("auth_screen")
                     },
                     modifier = Modifier.width(360.dp)
                 ) {
@@ -67,7 +83,10 @@ class MainActivity : ComponentActivity() {
                 }
             }
 
-            Row(horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxWidth()) {
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier.fillMaxWidth()
+            ) {
                 Button(
                     onClick = {
                         /*TODO*/
@@ -84,18 +103,20 @@ class MainActivity : ComponentActivity() {
     }
 
 
+
     @Preview(showBackground = true)
     @Composable
-    fun DefaultPreview() {
+
+    fun Preview() {
         GincanaTheme {
             // A surface container using the 'background' color from the theme
             Surface(
                 modifier = Modifier.fillMaxSize(),
                 color = MaterialTheme.colors.background
             ) {
-                MainScreen()
+                val navController = rememberNavController()
+                FirstScreen(navController)
             }
         }
     }
-}
 
