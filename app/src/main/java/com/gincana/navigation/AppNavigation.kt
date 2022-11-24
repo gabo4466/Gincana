@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 
 import com.gincana.LoginScreen
+import com.gincana.SignUpScreen
 import com.gincana.screens.AuthScreen
 
 
@@ -18,6 +19,9 @@ fun AppNavigation(){
         }
         composable(route= AppScreens.AuthScreen.route){
             LoginScreen(navController)
+        }
+        composable(route= AppScreens.SignUpScreen.route){
+            SignUpScreen(navController)
         }
     }
 }
