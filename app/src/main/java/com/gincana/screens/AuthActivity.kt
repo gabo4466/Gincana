@@ -85,12 +85,12 @@ import com.gincana.ui.theme.GincanaTheme
             ) {
                 Button(
                     onClick = {
-                        /*TODO*/
+                        navController.navigate("signup_screen")
                     },
                     modifier = Modifier.width(360.dp)
                 ) {
                     Text(
-                        text = "Registrarse",
+                        text = "Registro",
                         style = MaterialTheme.typography.button
                     )
                 }
