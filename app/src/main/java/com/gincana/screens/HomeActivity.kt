@@ -20,7 +20,7 @@ import com.gincana.ui.theme.GincanaTheme
 fun HomeScreen(navController: NavController){
     Scaffold(modifier = Modifier.fillMaxSize()) {
         MainTitle(title = "Home")
-        
+
     }
 
 }
