@@ -18,9 +18,9 @@ import com.gincana.ui.theme.GincanaTheme
 
 @Composable
 fun HomeScreen(navController: NavController){
-    Scaffold() {
+    Scaffold(modifier = Modifier.fillMaxSize()) {
         MainTitle(title = "Home")
-        HomeButtons(navController = )
+        
     }
 
 }
@@ -55,7 +55,7 @@ fun HomePreview() {
             color = MaterialTheme.colors.background
         ) {
             val navController = rememberNavController()
-            HomeScreen()
+            HomeScreen(navController)
         }
     }
 }
