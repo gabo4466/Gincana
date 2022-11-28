@@ -48,11 +48,6 @@ import com.gincana.ui.theme.GincanaTheme
                     .size(300.dp))
 
 
-
-
-
-
-
                 Buttons(navController)
             
 
@@ -108,7 +103,7 @@ import com.gincana.ui.theme.GincanaTheme
     @Preview(showBackground = true)
     @Composable
 
-    fun Preview() {
+    fun AuthPreview() {
         GincanaTheme {
             // A surface container using the 'background' color from the theme
             Surface(

@@ -2,9 +2,10 @@ package com.gincana
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,17 +32,19 @@ METHODS
     @Composable
     fun LoginScreen(navController: NavController) {
 
-        Box(
+        Scaffold(
             modifier = Modifier.fillMaxSize()
         ) {
             Column {
 
                     Title("Inicio de sesión o registro",navController)
-                    LoginForm()
+                    LoginForm(navController)
             }
         }
     }
 
+
+//COMMON
     @Composable
     fun Title(title: String,navController: NavController) {
         TopAppBar(
@@ -64,7 +67,7 @@ METHODS
     }
 
     @Composable
-    fun LoginForm() {
+    fun LoginForm(navController: NavController) {
         var email by remember { mutableStateOf(TextFieldValue("")) }
         var password by remember { mutableStateOf(TextFieldValue("")) }
         Column (
@@ -79,12 +82,13 @@ METHODS
                 OutlinedTextField(
                     value = email,
                     onValueChange = { email = it },
-                    label = { Text(text = "Email")},
+                    label = { Text(text = "Correo Electrónico")},
                     /*CAMBIAR  COLORES*/
                     colors = TextFieldDefaults.outlinedTextFieldColors(
                         focusedBorderColor = Color.Magenta,
                         unfocusedBorderColor = Color.Blue
-                    )
+                    ),
+                    modifier = Modifier.width(350.dp)
 
                 )
             }
@@ -97,15 +101,18 @@ METHODS
 
                     value = password,
                     onValueChange = {password= it},
-                    label = { Text(text = "Password")},
+                    label = { Text(text = "Contraseña")},
                     /*CAMBIAR COLORES*/
                     colors = TextFieldDefaults.outlinedTextFieldColors(
                         focusedBorderColor = Color.Magenta,
                         unfocusedBorderColor = Color.Blue
-                    )
+                    ),
+                    modifier = Modifier.width(350.dp)
 
                 )
             }
+            Spacer(modifier = Modifier.size(20.dp))
+            ForgottenPasword(navController)
             Spacer(modifier = Modifier.size(20.dp))
             Row(
                 horizontalArrangement = Arrangement.SpaceEvenly,
@@ -124,6 +131,7 @@ METHODS
                 Button(
                     onClick = {
                         /*TODO*/
+                              navController.navigate("home_screen")
                     },modifier = Modifier.width(350.dp)) {
                     Text(
                         text = "Acceder",
@@ -134,9 +142,18 @@ METHODS
         }
     }
 
+    @Composable
+    fun ForgottenPasword(navController: NavController){
+        Row(horizontalArrangement = Arrangement.End, modifier = Modifier.width(350.dp)){
+            Text(text = "¿Has olvidado tu contraseña?", modifier = Modifier.clickable {/* navController.navigate() TODO*/ })
+
+        }
+    }
+
+
     @Preview(showBackground = true)
     @Composable
-    fun Preview() {
+    fun LonginPreview() {
         GincanaTheme {
             // A surface container using the 'background' color from the theme
             Surface(
