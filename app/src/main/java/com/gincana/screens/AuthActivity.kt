@@ -43,17 +43,11 @@ import com.gincana.ui.theme.GincanaTheme
 
             Spacer(modifier = Modifier.height(100.dp))
             
-                Image(painter = painterResource(R.drawable.reuleta), contentDescription ="", modifier = Modifier
+                Image(painter = painterResource(R.drawable.ruleta), contentDescription ="", modifier = Modifier
                     .clip(shape = CircleShape)
                     .size(300.dp))
-
-
                 Buttons(navController)
-            
-
         }
-
-
    }
 
     @Composable

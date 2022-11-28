@@ -21,12 +21,16 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.gincana.R
+
+import com.gincana.common.composables.PasswordField
+import com.gincana.common.composables.TextInputIcon
+import com.gincana.common.composables.Title
 import com.gincana.ui.theme.GincanaTheme
 
     @Composable
     fun LoginScreen(navController: NavController) {
 
-        Scaffold(topBar = { Title("Inicio de sesión o registro" , navController) },
+        Scaffold(topBar = { Title(title ="Inicio de sesión o registro" , navController =navController)},
             modifier = Modifier.fillMaxSize()
         ) {
             LoginForm(navController)
@@ -36,7 +40,7 @@ import com.gincana.ui.theme.GincanaTheme
 
 
 //COMMON
-    @Composable
+   /* @Composable
     fun Title(title: String,navController: NavController) {
         TopAppBar(){
 
@@ -51,7 +55,7 @@ import com.gincana.ui.theme.GincanaTheme
             )
 
         }
-    }
+    }*/
 
     @Composable
     fun LoginForm(navController: NavController) {
@@ -61,11 +65,11 @@ import com.gincana.ui.theme.GincanaTheme
                 .fillMaxSize()
                 .padding(top = 100.dp)
         ) {
-            EmailField()
+            TextInputIcon(text = "Correo Electrónico", imageVector =Icons.Default.Email )
 
             Spacer(modifier = Modifier.size(20.dp))
 
-            PasswordField()
+            PasswordField("Contraseña")
 
             Spacer(modifier = Modifier.size(20.dp))
 
@@ -73,29 +77,26 @@ import com.gincana.ui.theme.GincanaTheme
 
             Spacer(modifier = Modifier.size(20.dp))
 
-            ButtonAccces(navController = navController)
-            }
+            ButtonAccces("Acceder") { navController.navigate("home_screen") }
         }
+    }
 
 
     @Composable
-    fun ButtonAccces(navController: NavController) {
+    fun ButtonAccces(text:String, onClick: ()->Unit) {
 
             Button(
-                onClick = {
-                    /*TODO*/
-                    navController.navigate("home_screen")
-                }, modifier = Modifier.width(350.dp)
+                onClick = onClick, modifier = Modifier.width(350.dp)
             ) {
                 Text(
-                    text = "Acceder",
+                    text = text,
                     style = MaterialTheme.typography.button
                 )
             }
         }
 
 
-    @Composable
+    /*@Composable
     fun EmailField(){
         var email by remember { mutableStateOf(TextFieldValue("")) }
 
@@ -104,7 +105,7 @@ import com.gincana.ui.theme.GincanaTheme
                 onValueChange = { email = it },
                 label = { EmailLabel()},
                 singleLine = true,
-                /*CAMBIAR  COLORES*/
+                *//*CAMBIAR  COLORES*//*
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = Color.Magenta,
                     unfocusedBorderColor = Color.Blue
@@ -112,9 +113,9 @@ import com.gincana.ui.theme.GincanaTheme
                 modifier = Modifier.width(350.dp)
 
             )
-        }
+        }*/
 
-
+/*
     @Composable
     fun PasswordField(){
         var password by remember { mutableStateOf(TextFieldValue("")) }
@@ -133,7 +134,7 @@ import com.gincana.ui.theme.GincanaTheme
             onValueChange = {password= it},
             label = { PasswordLabel()},
             singleLine = true,
-            /*CAMBIAR COLORES*/
+            *//*CAMBIAR COLORES*//*
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 focusedBorderColor = Color.Magenta,
                 unfocusedBorderColor = Color.Blue,
@@ -157,8 +158,8 @@ import com.gincana.ui.theme.GincanaTheme
 
         )
     }
-
-    @Composable
+*/
+   /* @Composable
     fun EmailLabel(){
         Row() {
             Icon(
@@ -168,8 +169,8 @@ import com.gincana.ui.theme.GincanaTheme
 
             Text(text = "Correo Electrónico")
         }
-    }
-
+    }*/
+/*
     @Composable
     fun PasswordLabel(){
         Row() {
@@ -180,7 +181,7 @@ import com.gincana.ui.theme.GincanaTheme
 
             Text(text = "Contraseña")
         }
-    }
+    }*/
 
     @Composable
     fun ForgottenPasword(navController: NavController){
