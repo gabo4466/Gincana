@@ -23,29 +23,14 @@ import androidx.navigation.compose.rememberNavController
 import com.example.gincana.R
 import com.gincana.ui.theme.GincanaTheme
 
-
-/*
-METHODS
- */
-   /* private fun registerFireBase(email: TextFieldValue, password: TextFieldValue) {
-
-    }
-*/
-    /*
-    COMPOSABLESexample
-     */
-
     @Composable
     fun LoginScreen(navController: NavController) {
 
-        Scaffold(
+        Scaffold(topBar = { Title("Inicio de sesión o registro" , navController) },
             modifier = Modifier.fillMaxSize()
         ) {
-            Column {
+            LoginForm(navController)
 
-                    Title("Inicio de sesión o registro",navController)
-                    LoginForm(navController)
-            }
         }
     }
 
@@ -53,11 +38,7 @@ METHODS
 //COMMON
     @Composable
     fun Title(title: String,navController: NavController) {
-        TopAppBar(
-          /*  modifier = Modifier
-                .fillMaxWidth()
-                .background(color = MaterialTheme.colors.primary)*/
-        ) {
+        TopAppBar(){
 
             Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Arrow Back", modifier = Modifier.clickable { navController.popBackStack() })
             Spacer(modifier = Modifier.width(8.dp))
