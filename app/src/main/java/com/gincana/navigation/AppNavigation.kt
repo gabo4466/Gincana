@@ -14,11 +14,11 @@ import com.gincana.screens.HomeScreen
 @Composable
 fun AppNavigation(){
     val navController = rememberNavController()
-    NavHost(navController = navController , startDestination = AppScreens.FirstScreen.route ){
-        composable(route= AppScreens.FirstScreen.route){
+    NavHost(navController = navController , startDestination = AppScreens.AuthScreen.route ){
+        composable(route= AppScreens.AuthScreen.route){
             AuthScreen(navController)
         }
-        composable(route= AppScreens.AuthScreen.route){
+        composable(route= AppScreens.LoginScreen.route){
             LoginScreen(navController)
         }
         composable(route= AppScreens.SignUpScreen.route){
