@@ -10,4 +10,5 @@ sealed class AppScreens(val route: String,val icon: ImageVector?){
     object LoginScreen: AppScreens("login_screen",null)
     object SignUpScreen: AppScreens("signup_screen",null)
     object HomeScreen: AppScreens("home_screen",Icons.Default.Home)
+    object JoinGameScreen: AppScreens("joingame_screen", null)
 }
