@@ -1,30 +1,15 @@
 package com.gincana.common.composables
 
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
 import com.gincana.navigation.AppScreens
-import java.lang.reflect.Modifier
-
-
-
 
 
 /*
@@ -61,7 +46,7 @@ fun BottomNav(navController: NavController) {
     val currentRoute = navBackStackEntry?.destination
     val items = listOf(
         AppScreens.HomeScreen,
-        AppScreens.FirstScreen
+        AppScreens.AuthScreen
 
 
     )
