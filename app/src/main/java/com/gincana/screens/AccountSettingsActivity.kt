@@ -12,17 +12,25 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.gincana.common.composables.BottomNav
 import com.gincana.common.composables.Title
 import com.gincana.ui.theme.GincanaTheme
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun AccountSettingsScreen(navController: NavController){
-    Scaffold(topBar = { Title(title ="Ajustes de cuenta" , navController =navController) },
-        modifier = Modifier.fillMaxSize()) {
+    GincanaTheme() {
+        Scaffold(
+            topBar = { Title(title ="Ajustes de cuenta", navController =navController)},
+            bottomBar = { BottomNav(
+                navController =navController)},
+            modifier = Modifier.fillMaxSize()
+        ){
 
-        SettingsBody(navController)
+            SettingsBody(navController)
+        }
     }
+
 }
 
 @Composable
@@ -42,12 +50,14 @@ fun SettingsBody(navController: NavController) {
 
 fun AccountSettingsPreview() {
     GincanaTheme {
-        // A surface container using the 'background' color from the theme
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colors.background
-        ) {
-            val navController = rememberNavController()
+        val navController = rememberNavController()
+        Scaffold(
+            topBar = { Title(title ="Ajustes de cuenta", navController =navController)},
+            bottomBar = { BottomNav(
+                navController =navController)},
+            modifier = Modifier.fillMaxSize()
+        ){
+
             SettingsBody(navController)
         }
     }
