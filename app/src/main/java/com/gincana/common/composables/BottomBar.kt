@@ -1,6 +1,7 @@
 package com.gincana.common.composables
 
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
@@ -54,7 +55,9 @@ fun BottomNav(navController: NavController) {
 
     )
     BottomAppBar(cutoutShape = CircleShape) {
-        Row() {
+        Row(
+            modifier = Modifier.padding(10.dp)
+        ) {
             items.forEachIndexed { index, it ->
                 //if (index != 2) {
                     // Main item

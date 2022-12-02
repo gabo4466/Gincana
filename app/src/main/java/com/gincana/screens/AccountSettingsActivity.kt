@@ -122,7 +122,6 @@ fun SettingsBody(navController: NavController) {
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Preview(showBackground = true)
 @Composable
-
 fun AccountSettingsPreview() {
     GincanaTheme {
         val navController = rememberNavController()
