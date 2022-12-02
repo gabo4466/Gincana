@@ -46,7 +46,7 @@ fun BottomNav(navController: NavController) {
     val currentRoute = navBackStackEntry?.destination
     val items = listOf(
         AppScreens.HomeScreen,
-        AppScreens.AuthScreen
+        AppScreens.AccountSettingsScreen
 
 
     )
