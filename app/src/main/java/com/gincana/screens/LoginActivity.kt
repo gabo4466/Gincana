@@ -65,11 +65,14 @@ import com.gincana.ui.theme.GincanaTheme
                 .fillMaxSize()
                 .padding(top = 100.dp)
         ) {
-            TextInputIcon(text = "Correo Electrónico", imageVector =Icons.Default.Email )
+            var password by remember { mutableStateOf("") }
+            var email by remember { mutableStateOf("") }
+
+            TextInputIcon(email,{ email = it },label = "Correo Electrónico", imageVector =Icons.Default.Email )
 
             Spacer(modifier = Modifier.size(20.dp))
 
-            PasswordField("Contraseña")
+            PasswordField(password,{password= it},"Contraseña")
 
             Spacer(modifier = Modifier.size(20.dp))
 
@@ -206,6 +209,10 @@ import com.gincana.ui.theme.GincanaTheme
                 LoginScreen(navController)
             }
         }
+    }
+
+    private fun CheckFields(){
+
     }
 
 

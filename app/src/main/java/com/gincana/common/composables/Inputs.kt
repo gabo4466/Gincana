@@ -22,8 +22,7 @@ import androidx.navigation.NavController
 import com.google.android.material.R
 
 @Composable
-fun PasswordField(text:String){
-    var password by remember { mutableStateOf(TextFieldValue("")) }
+fun PasswordField(password:String,onVAlueChange: (String)->Unit,label:String){
 
     var passwordVisibility by remember { mutableStateOf(false) }
 
@@ -36,8 +35,8 @@ fun PasswordField(text:String){
     OutlinedTextField(
 
         value = password,
-        onValueChange = {password= it},
-        label = { InputLabel(text =text , imageVector =Icons.Default.Lock ) },
+        onValueChange = onVAlueChange,
+        label = { InputLabel(text =label , imageVector =Icons.Default.Lock ) },
         singleLine = true,
         /*CAMBIAR COLORES*/
         colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -79,13 +78,13 @@ fun InputLabel(text:String,imageVector: ImageVector){
 
 
 @Composable
-fun TextInputIcon(text:String,imageVector: ImageVector){
-    var input by remember { mutableStateOf(TextFieldValue("")) }
+fun TextInputIcon(text:String,onVAlueChange: (String) -> Unit,label:String,imageVector: ImageVector){
+
 
     OutlinedTextField(
-        value = input,
-        onValueChange = { input = it },
-        label = { InputLabel(text = text, imageVector =imageVector ) },
+        value = text,
+        onValueChange = onVAlueChange,
+        label = { InputLabel(text = label, imageVector =imageVector ) },
         singleLine = true,
         /*CAMBIAR  COLORES*/
         colors = TextFieldDefaults.outlinedTextFieldColors(
