@@ -14,7 +14,7 @@ import com.gincana.screens.HomeScreen
 @Composable
 fun AppNavigation(){
     val navController = rememberNavController()
-    NavHost(navController = navController , startDestination = AppScreens.FirstScreen.route){
+    NavHost(navController = navController , startDestination = AppScreens.FirstScreen.route ){
         composable(route= AppScreens.FirstScreen.route){
             AuthScreen(navController)
         }
