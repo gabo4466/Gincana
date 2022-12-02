@@ -33,12 +33,12 @@ import kotlin.math.log
 
 
 @Composable
-    fun AuthScreen(navController: NavController){
-        Scaffold(modifier = Modifier.fillMaxSize()) {
+fun AuthScreen(navController: NavController){
+    Scaffold(modifier = Modifier.fillMaxSize()) {
 
-            BodyContent(navController)
-        }
+        BodyContent(navController)
     }
+}
 
 suspend fun rotateCycles(
     numberCycles: Int,
@@ -110,20 +110,20 @@ fun Roulette(){
     COMPOSABLESexample
      */
 
-    @Composable
-    fun BodyContent(navController: NavController) {
+@Composable
+fun BodyContent(navController: NavController) {
 
 
-        Column(horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxSize()) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween,
+        modifier = Modifier.fillMaxSize()) {
 
-            Spacer(modifier = Modifier.height(100.dp))
-            
-            Roulette()
-            Buttons(navController)
-        }
-   }
+        Spacer(modifier = Modifier.height(100.dp))
+
+        Roulette()
+        Buttons(navController)
+    }
+}
 
     @Composable
     fun Buttons(navController: NavController) {
