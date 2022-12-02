@@ -97,4 +97,11 @@ fun TextInputIcon(text:String,onVAlueChange: (String) -> Unit,label:String,image
     )
 }
 
+@Composable
+fun ErrorText(text:String,hidden: Boolean=true){
+    if(!hidden){
+        Text(text = text, color = MaterialTheme.colors.error)
+    }
+}
+
 

@@ -1,5 +1,6 @@
 package com.gincana
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -17,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.gincana.common.composables.ErrorText
 
 import com.gincana.common.composables.PasswordField
 import com.gincana.common.composables.TextInputIcon
@@ -51,6 +53,8 @@ METHODS
         var email by remember { mutableStateOf("") }
         var password by remember { mutableStateOf("") }
         var repeatPassword by remember { mutableStateOf("") }
+        var hidden by remember { mutableStateOf(true) }
+        var error by remember { mutableStateOf("") }
         Column (
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
@@ -64,8 +68,17 @@ METHODS
             PasswordField(password,{password= it},"Contraseña")
             Spacer(modifier = Modifier.size(20.dp))
             PasswordField(repeatPassword,{repeatPassword= it},"Repetir contraseña")
+            ErrorText(text = error,hidden)
             Spacer(modifier = Modifier.size(20.dp))
-            ButtonSignUp(text = "Registrarse") {navController.navigate("home_screen") }
+            ButtonSignUp(text = "Registrarse") {
+                if(!checkisEmpty(*arrayOf(email,password))) {
+
+                    navController.navigate("home_screen")
+                }else{
+                error="Debes rellenar todos los campos"
+                hidden=false
+                Log.d("error:",error)
+            } }
 
         }
     }
