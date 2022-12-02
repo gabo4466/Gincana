@@ -10,6 +10,7 @@ import com.gincana.SignUpScreen
 import com.gincana.screens.AccountSettingsScreen
 import com.gincana.screens.AuthScreen
 import com.gincana.screens.HomeScreen
+import com.gincana.screens.JoinGameScreen
 
 
 @Composable
@@ -27,6 +28,9 @@ fun AppNavigation(){
         }
         composable(route= AppScreens.HomeScreen.route){
             HomeScreen(navController)
+        }
+        composable(route= AppScreens.JoinGameScreen.route){
+            JoinGameScreen(navController)
         }
         composable(route = AppScreens.AccountSettingsScreen.route){
             AccountSettingsScreen(navController)

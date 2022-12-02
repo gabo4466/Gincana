@@ -47,23 +47,23 @@ METHODS
 
     @Composable
     fun SignUpForm(navController: NavController) {
-        var name by remember { mutableStateOf(TextFieldValue("")) }
-        var email by remember { mutableStateOf(TextFieldValue("")) }
-        var password by remember { mutableStateOf(TextFieldValue("")) }
-        var repeatPassword by remember { mutableStateOf(TextFieldValue("")) }
+        var name by remember { mutableStateOf("") }
+        var email by remember { mutableStateOf("") }
+        var password by remember { mutableStateOf("") }
+        var repeatPassword by remember { mutableStateOf("") }
         Column (
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxSize()
                 .padding(top = 100.dp)
         ) {
-            TextInputIcon(text = "Nombre", imageVector =Icons.Default.Person )
+            TextInputIcon(text = name,{ name = it },label = "Nombre", imageVector =Icons.Default.Person )
             Spacer(modifier = Modifier.size(20.dp))
-            TextInputIcon(text = "Correo Electrónico", imageVector =Icons.Default.Email )
+            TextInputIcon(email,{ email = it },label = "Correo Electrónico", imageVector =Icons.Default.Email )
             Spacer(modifier = Modifier.size(20.dp))
-            PasswordField("Contraseña")
+            PasswordField(password,{password= it},"Contraseña")
             Spacer(modifier = Modifier.size(20.dp))
-            PasswordField("Repetir contraseña")
+            PasswordField(repeatPassword,{repeatPassword= it},"Repetir contraseña")
             Spacer(modifier = Modifier.size(20.dp))
             ButtonSignUp(text = "Registrarse") {navController.navigate("home_screen") }
 
