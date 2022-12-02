@@ -78,7 +78,7 @@ fun InputLabel(text:String,imageVector: ImageVector){
 
 
 @Composable
-fun TextInputIcon(text:String,onVAlueChange: (String) -> Unit,label:String,imageVector: ImageVector){
+fun TextInputIcon(text:String,onVAlueChange: (String) -> Unit,label:String,imageVector: ImageVector, modifier: Modifier = Modifier){
 
 
     OutlinedTextField(
@@ -91,7 +91,7 @@ fun TextInputIcon(text:String,onVAlueChange: (String) -> Unit,label:String,image
             focusedBorderColor = Color.Magenta,
             unfocusedBorderColor = Color.Blue
         ),
-        modifier = Modifier.width(350.dp)
+        modifier = modifier.width(350.dp)
 
     )
 }

@@ -41,7 +41,9 @@ fun JoinGameBody(navControler: NavController){
     ) {
         var gameCode by remember { mutableStateOf("") }
 
-        TextInputIcon(gameCode, {gameCode = it}, "Código de partida", imageVector = Icons.Default.Info)
+        TextInputIcon(gameCode, {
+            if (it.length == 4) gameCode = it 
+        }, "Código de partida", imageVector = Icons.Default.Info)
 
         Spacer(modifier = Modifier.size(20.dp))
 
