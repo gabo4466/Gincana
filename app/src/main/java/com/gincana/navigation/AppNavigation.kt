@@ -7,6 +7,7 @@ import androidx.navigation.compose.rememberNavController
 
 import com.gincana.LoginScreen
 import com.gincana.SignUpScreen
+import com.gincana.screens.AccountSettingsScreen
 import com.gincana.screens.AuthScreen
 import com.gincana.screens.HomeScreen
 import com.gincana.screens.JoinGameScreen
@@ -30,6 +31,9 @@ fun AppNavigation(){
         }
         composable(route= AppScreens.JoinGameScreen.route){
             JoinGameScreen(navController)
+        }
+        composable(route = AppScreens.AccountSettingsScreen.route){
+            AccountSettingsScreen(navController)
         }
     }
 }
