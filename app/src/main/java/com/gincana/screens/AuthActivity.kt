@@ -26,6 +26,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.gincana.R
 import com.gincana.ui.theme.GincanaTheme
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.logging.Logger
 import kotlin.math.log
@@ -39,7 +40,38 @@ import kotlin.math.log
         }
     }
 
+suspend fun rotateCycles(
+    numberCycles: Int,
+    rotation: Animatable<Float, AnimationVector1D>,
+    incrementSpeedParam: Int = 100,
+    initialSpeed: Int = 0
+){
+    var speed: Int = 0
+    var incrementSpeed: Int = 0
+    var cyclesMade: Int = 0
+    val cycle = arrayOf(90f, 180f, 270f, 360f)
+    if (  (incrementSpeedParam < 0) && (initialSpeed / (incrementSpeedParam * -1) < numberCycles) ) {
+        speed = 300
+        incrementSpeed = 100
+    }else {
+        speed = initialSpeed
+        incrementSpeed = incrementSpeedParam
+    }
+    val smoothIncrement = (incrementSpeed/4) -1
+        while (cyclesMade < numberCycles){
 
+        for (angle in cycle){
+            rotation.animateTo(
+                targetValue = angle,
+                animationSpec = tween(speed, easing = LinearEasing)
+            )
+            speed += smoothIncrement
+        }
+
+        cyclesMade++
+        rotation.snapTo(0f)
+    }
+}
 
 @Composable
 fun Roulette(){
@@ -53,20 +85,22 @@ fun Roulette(){
 
     var modifier= Modifier
         .clip(shape = CircleShape)
-        .size(300.dp).rotate(rotation.value)
+        .size(300.dp)
+        .rotate(rotation.value)
         .clickable {
-                scope.launch {
-                    rotation.animateTo(
-                        targetValue = 180f,
-                        animationSpec = tween(1000, easing = LinearEasing)
-                    )
+
+            scope.launch {
+                if (!flag){
                     flag = !flag
-                    rotation.animateTo(
-                        targetValue = 360f,
-                        animationSpec = tween(1000, easing = LinearEasing)
-                    )
-                    rotation.snapTo(0f)
+
+                    rotateCycles(10, rotation)
+                    flag=!flag
                 }
+
+            }
+
+
+
         }
 
 
