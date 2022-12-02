@@ -70,7 +70,7 @@ fun InputLabel(text:String,imageVector: ImageVector){
         Icon(
             imageVector = imageVector,
             contentDescription = "Arrow Back")
-        Spacer(modifier = Modifier.width(5.dp))
+        Spacer(modifier = Modifier.width(8.dp))
 
         Text(text = text)
     }
