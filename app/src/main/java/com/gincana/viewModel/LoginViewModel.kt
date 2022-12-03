@@ -21,6 +21,8 @@ class LoginViewModel() : ViewModel() {
     private val isLoading = MutableLiveData(false)
     private val hasErrors = MutableLiveData(false)
     private val logged = MutableLiveData(false)
+    private val email = MutableLiveData("")
+    fun email(): LiveData<String> = email
     fun logged(): LiveData<Boolean> = logged
     fun isLoading(): LiveData<Boolean> = isLoading
     fun hasErrors(): LiveData<Boolean> = hasErrors
@@ -49,8 +51,8 @@ class LoginViewModel() : ViewModel() {
                     .addOnCompleteListener{
                         if (it.isSuccessful){
                             val user = auth.currentUser
-                            Log.d("Login", "${user?.displayName}")
                             logged.postValue(true)
+                            email.postValue(user?.email)
                         }else {
                             hasErrors.postValue(true)
                         }
