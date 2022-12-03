@@ -39,24 +39,6 @@ fun LoginScreen(navController: NavController) {
 }
 
 
-//COMMON
-/* @Composable
- fun Title(title: String,navController: NavController) {
-     TopAppBar(){
-
-         Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Arrow Back", modifier = Modifier.clickable { navController.popBackStack() })
-         Spacer(modifier = Modifier.width(8.dp))
-         Text(
-             text = title,
-             style = MaterialTheme.typography.h6,
-             color = MaterialTheme.colors.onPrimary,
-             textAlign = TextAlign.Center,
-             modifier = Modifier.padding(10.dp)
-         )
-
-     }
- }*/
-
 @Composable
 fun LoginForm(navController: NavController) {
     Column(

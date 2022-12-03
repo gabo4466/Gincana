@@ -25,18 +25,6 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     AppNavigation()
-
-                    /*
-                        val navigationController= rememberNavController()
-                        NavHost(navController= navigationController, startDestination = "Home"){
-
-                            composable("Auth"){ AuthScreen() }
-
-                            composable("screen1"){ Screen1(navigationController) }
-                            composable("screen2"){ Screen2(navigationController) }
-                            composable("screen3"){ Screen3(navigationController) }
-
-                        }*/
                 }
             }
         }
