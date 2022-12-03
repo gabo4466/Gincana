@@ -1,7 +1,7 @@
 package com.gincana.screens
 
 
-
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Image
@@ -24,7 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.gincana.R
+import com.gincana.R
 import com.gincana.ui.theme.GincanaTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -32,8 +32,9 @@ import java.util.logging.Logger
 import kotlin.math.log
 
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun AuthScreen(navController: NavController){
+fun AuthScreen(navController: NavController) {
     Scaffold(modifier = Modifier.fillMaxSize()) {
 
         BodyContent(navController)
@@ -45,22 +46,22 @@ suspend fun rotateCycles(
     rotation: Animatable<Float, AnimationVector1D>,
     incrementSpeedParam: Int = 100,
     initialSpeed: Int = 0
-){
+) {
     var speed: Int = 0
     var incrementSpeed: Int = 0
     var cyclesMade: Int = 0
     val cycle = arrayOf(90f, 180f, 270f, 360f)
-    if (  (incrementSpeedParam < 0) && (initialSpeed / (incrementSpeedParam * -1) < numberCycles) ) {
+    if ((incrementSpeedParam < 0) && (initialSpeed / (incrementSpeedParam * -1) < numberCycles)) {
         speed = 300
         incrementSpeed = 100
-    }else {
+    } else {
         speed = initialSpeed
         incrementSpeed = incrementSpeedParam
     }
-    val smoothIncrement = (incrementSpeed/4) -1
-        while (cyclesMade < numberCycles){
+    val smoothIncrement = (incrementSpeed / 4) - 1
+    while (cyclesMade < numberCycles) {
 
-        for (angle in cycle){
+        for (angle in cycle) {
             rotation.animateTo(
                 targetValue = angle,
                 animationSpec = tween(speed, easing = LinearEasing)
@@ -74,8 +75,8 @@ suspend fun rotateCycles(
 }
 
 @Composable
-fun Roulette(){
-    var spin=false
+fun Roulette() {
+    var spin = false
     var flag by rememberSaveable {
         mutableStateOf(spin)
     }
@@ -83,40 +84,45 @@ fun Roulette(){
     val scope = rememberCoroutineScope()
 
 
-    var modifier= Modifier
+    var modifier = Modifier
         .clip(shape = CircleShape)
         .size(300.dp)
         .rotate(rotation.value)
         .clickable {
 
             scope.launch {
-                if (!flag){
+                if (!flag) {
                     flag = !flag
 
                     rotateCycles(10, rotation)
-                    flag=!flag
+                    flag = !flag
                 }
 
             }
 
 
-
         }
 
 
-    Image(painter = painterResource(R.drawable.ruleta), contentDescription ="", modifier=modifier)
+    Image(
+        painter = painterResource(R.drawable.ruleta),
+        contentDescription = "",
+        modifier = modifier
+    )
 }
-    /*
-    COMPOSABLESexample
-     */
+/*
+COMPOSABLESexample
+ */
 
 @Composable
 fun BodyContent(navController: NavController) {
 
 
-    Column(horizontalAlignment = Alignment.CenterHorizontally,
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier.fillMaxSize()) {
+        modifier = Modifier.fillMaxSize()
+    ) {
 
         Spacer(modifier = Modifier.height(100.dp))
 
@@ -125,63 +131,62 @@ fun BodyContent(navController: NavController) {
     }
 }
 
-    @Composable
-    fun Buttons(navController: NavController) {
+@Composable
+fun Buttons(navController: NavController) {
 
-        Column(modifier = Modifier.padding(bottom = 50.dp)) {
+    Column(modifier = Modifier.padding(bottom = 50.dp)) {
 
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.fillMaxWidth()
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Button(
+                onClick = {
+                    /*TODO*/
+                    navController.navigate("login_screen")
+                },
+                modifier = Modifier.width(360.dp)
             ) {
-                Button(
-                    onClick = {
-                        /*TODO*/
-                        navController.navigate("login_screen")
-                    },
-                    modifier = Modifier.width(360.dp)
-                ) {
-                    Text(
-                        text = "Iniciar Sesión",
-                        style = MaterialTheme.typography.button
-                    )
-                }
+                Text(
+                    text = "Iniciar Sesión",
+                    style = MaterialTheme.typography.button
+                )
             }
+        }
 
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.fillMaxWidth()
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Button(
+                onClick = {
+                    navController.navigate("signup_screen")
+                },
+                modifier = Modifier.width(360.dp)
             ) {
-                Button(
-                    onClick = {
-                        navController.navigate("signup_screen")
-                    },
-                    modifier = Modifier.width(360.dp)
-                ) {
-                    Text(
-                        text = "Registro",
-                        style = MaterialTheme.typography.button
-                    )
-                }
+                Text(
+                    text = "Registro",
+                    style = MaterialTheme.typography.button
+                )
             }
         }
     }
+}
 
 
+@Preview(showBackground = true)
+@Composable
 
-    @Preview(showBackground = true)
-    @Composable
-
-    fun AuthPreview() {
-        GincanaTheme {
-            // A surface container using the 'background' color from the theme
-            Surface(
-                modifier = Modifier.fillMaxSize(),
-                color = MaterialTheme.colors.background
-            ) {
-                val navController = rememberNavController()
-                AuthScreen(navController)
-            }
+fun AuthPreview() {
+    GincanaTheme {
+        // A surface container using the 'background' color from the theme
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colors.background
+        ) {
+            val navController = rememberNavController()
+            AuthScreen(navController)
         }
     }
+}
 

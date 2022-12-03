@@ -18,7 +18,8 @@ fun Avatar(image: Int, size: Dp) {
     Image(
         painter = painterResource(id = image),
         contentDescription = "Avatar",
-        modifier = Modifier.size(size)
+        modifier = Modifier
+            .size(size)
             .clip(shape = CircleShape)
             .border(border = BorderStroke(2.dp, MaterialTheme.colors.primary), shape = CircleShape)
     )

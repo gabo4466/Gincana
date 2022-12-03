@@ -1,5 +1,6 @@
 package com.gincana.screens
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -21,12 +22,14 @@ import com.gincana.common.composables.Title
 import com.gincana.ui.theme.GincanaTheme
 
 
-
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun HomeScreen(navController: NavController){
-    Scaffold(topBar = { Title(title = "Home", navController =navController,false ) },bottomBar= { BottomNav(
-        navController =navController
-    ) }, modifier = Modifier.fillMaxSize()) {
+fun HomeScreen(navController: NavController) {
+    Scaffold(topBar = { Title(title = "Home", navController = navController, false) }, bottomBar = {
+        BottomNav(
+            navController = navController
+        )
+    }, modifier = Modifier.fillMaxSize()) {
 
         BodyHome(navController)
     }
@@ -34,13 +37,17 @@ fun HomeScreen(navController: NavController){
 }
 
 @Composable
-fun BottomBar(){
-    BottomAppBar( ) {
+fun BottomBar() {
+    BottomAppBar {
 
         BottomNavigationItem(
             icon = { Icon(Icons.Default.Person, contentDescription = "item.title") },
-            label = { Text(text = "item.title",
-                fontSize = 9.sp) },
+            label = {
+                Text(
+                    text = "item.title",
+                    fontSize = 9.sp
+                )
+            },
             selectedContentColor = Color.Black,
             unselectedContentColor = Color.Black.copy(0.4f),
             alwaysShowLabel = true,
@@ -52,23 +59,26 @@ fun BottomBar(){
 }
 
 @Composable
-fun BodyHome(navController: NavController){
-    Column(horizontalAlignment = Alignment.CenterHorizontally,
+fun BodyHome(navController: NavController) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
-            modifier = Modifier
-                .fillMaxSize()) {
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
 
 
-       /* ButtonHome(text ="Crear partida" ) {
+        /* ButtonHome(text ="Crear partida" ) {
 
-        }*/
-        ButtonHome(text ="Unirse a partida" ) {
+         }*/
+        ButtonHome(text = "Unirse a partida") {
 
         }
     }
 }
+
 @Composable
-fun ButtonHome(text:String, onClick: ()->Unit) {
+fun ButtonHome(text: String, onClick: () -> Unit) {
 
     Button(
         onClick = onClick, modifier = Modifier.width(350.dp)
@@ -81,9 +91,10 @@ fun ButtonHome(text:String, onClick: ()->Unit) {
 }
 
 @Composable
-fun HomeButtons(navController: NavController){
+fun HomeButtons(navController: NavController) {
 
 }
+
 @Preview(showBackground = true)
 @Composable
 fun HomePreview() {

@@ -18,21 +18,24 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.gincana.R
+import com.gincana.R
 import com.gincana.common.composables.*
 import com.gincana.ui.theme.GincanaTheme
 import com.gincana.ui.theme.Shapes
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun AccountSettingsScreen(navController: NavController){
-    GincanaTheme() {
+fun AccountSettingsScreen(navController: NavController) {
+    GincanaTheme {
         Scaffold(
-            topBar = { Title(title ="Ajustes de cuenta", navController =navController)},
-            bottomBar = { BottomNav(
-                navController =navController)},
+            topBar = { Title(title = "Ajustes de cuenta", navController = navController, false) },
+            bottomBar = {
+                BottomNav(
+                    navController = navController
+                )
+            },
             modifier = Modifier.fillMaxSize()
-        ){
+        ) {
 
             SettingsBody(navController)
         }
@@ -61,112 +64,129 @@ fun SettingsBody(navController: NavController) {
             .padding(top = 30.dp, bottom = 30.dp)
     ) {
 
-        Column (
+        Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .border(BorderStroke(2.dp, MaterialTheme.colors.primary), RoundedCornerShape(5.dp))
                 .fillMaxWidth()
                 .padding(bottom = 30.dp)
 
-        ){
-            Row (
+        ) {
+            Row(
                 horizontalArrangement = Arrangement.Center,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(10.dp)
-            ){
-                Text(text = "Datos públicos",style = MaterialTheme.typography.h5)
+            ) {
+                Text(text = "Datos públicos", style = MaterialTheme.typography.h5)
             }
             Divider(color = MaterialTheme.colors.primary, thickness = 1.dp)
-            Row (
+            Row(
                 horizontalArrangement = Arrangement.Center,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(10.dp)
 
-            ){
+            ) {
                 Avatar(R.drawable.avatar_1, size = 100.dp)
             }
-            Row (
+            Row(
                 horizontalArrangement = Arrangement.Center,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(10.dp)
-            ){
-                Button(onClick = { /*TODO*/
-                }, modifier = Modifier.width(300.dp)
+            ) {
+                Button(
+                    onClick = { /*TODO*/
+                    }, modifier = Modifier.width(300.dp)
                 ) {
                     Text(text = "Cambiar avatar", style = MaterialTheme.typography.button)
                 }
             }
-            Row (
+            Row(
                 horizontalArrangement = Arrangement.Center,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(10.dp)
-            ){
-                TextInputIcon(text = nickname, onVAlueChange = {nickname = it}, label = "Nickname", imageVector = Icons.Default.Person)
+            ) {
+                TextInputIcon(
+                    text = nickname,
+                    onVAlueChange = { nickname = it },
+                    label = "Nickname",
+                    imageVector = Icons.Default.Person
+                )
             }
-            Row (
+            Row(
                 horizontalArrangement = Arrangement.Center,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(10.dp)
-            ){
-                Button(onClick = { /*TODO*/
-                }, modifier = Modifier.width(300.dp)
+            ) {
+                Button(
+                    onClick = { /*TODO*/
+                    }, modifier = Modifier.width(300.dp)
                 ) {
                     Text(text = "Actualizar perfil", style = MaterialTheme.typography.button)
                 }
             }
         }
-        
+
         Spacer(modifier = Modifier.size(25.dp))
 
-        Column (
+        Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .border(BorderStroke(2.dp, MaterialTheme.colors.primary), RoundedCornerShape(5.dp))
                 .fillMaxWidth()
                 .padding(10.dp)
 
-        ){
-            Row (
+        ) {
+            Row(
                 horizontalArrangement = Arrangement.Center,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(10.dp)
 
-            ){
+            ) {
                 Text(text = "Datos privados", style = MaterialTheme.typography.h5)
             }
             Divider(color = MaterialTheme.colors.primary, thickness = 1.dp)
-            Row (
+            Row(
                 horizontalArrangement = Arrangement.Center,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(10.dp)
 
-            ){
-                TextInputIcon(text = email, onVAlueChange = {email = it}, label = "Email", imageVector = Icons.Default.Email )
+            ) {
+                TextInputIcon(
+                    text = email,
+                    onVAlueChange = { email = it },
+                    label = "Email",
+                    imageVector = Icons.Default.Email
+                )
             }
-            Row (
+            Row(
                 horizontalArrangement = Arrangement.Center,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(10.dp)
 
-            ){
-                PasswordField(password = password, onVAlueChange = {password = it}, label = "Contraseña")
+            ) {
+                PasswordField(
+                    password = password,
+                    onVAlueChange = { password = it },
+                    label = "Contraseña"
+                )
             }
-            Row (
+            Row(
                 horizontalArrangement = Arrangement.Center,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(10.dp)
-            ){
-                Button(onClick = { /*TODO*/
-                }, modifier = Modifier.width(300.dp)
+            ) {
+                Button(
+                    onClick = { /*TODO*/
+                    }, modifier = Modifier.width(300.dp)
                 ) {
                     Text(text = "Actualizar cuenta", style = MaterialTheme.typography.button)
                 }
@@ -184,11 +204,14 @@ fun AccountSettingsPreview() {
     GincanaTheme {
         val navController = rememberNavController()
         Scaffold(
-            topBar = { Title(title ="Ajustes de cuenta", navController =navController)},
-            bottomBar = { BottomNav(
-                navController =navController)},
+            topBar = { Title(title = "Ajustes de cuenta", navController = navController) },
+            bottomBar = {
+                BottomNav(
+                    navController = navController
+                )
+            },
             modifier = Modifier.fillMaxSize()
-        ){
+        ) {
 
             SettingsBody(navController)
         }

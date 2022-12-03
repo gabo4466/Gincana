@@ -14,7 +14,7 @@ import com.gincana.navigation.AppNavigation
 
 import com.gincana.ui.theme.GincanaTheme
 
-class MainActivity : ComponentActivity()  {
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -26,17 +26,17 @@ class MainActivity : ComponentActivity()  {
                 ) {
                     AppNavigation()
 
-                /*
-                    val navigationController= rememberNavController()
-                    NavHost(navController= navigationController, startDestination = "Home"){
+                    /*
+                        val navigationController= rememberNavController()
+                        NavHost(navController= navigationController, startDestination = "Home"){
 
-                        composable("Auth"){ AuthScreen() }
+                            composable("Auth"){ AuthScreen() }
 
-                        composable("screen1"){ Screen1(navigationController) }
-                        composable("screen2"){ Screen2(navigationController) }
-                        composable("screen3"){ Screen3(navigationController) }
+                            composable("screen1"){ Screen1(navigationController) }
+                            composable("screen2"){ Screen2(navigationController) }
+                            composable("screen3"){ Screen3(navigationController) }
 
-                    }*/
+                        }*/
                 }
             }
         }
