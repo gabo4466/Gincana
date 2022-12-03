@@ -4,12 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.gincana.navigation.AppNavigation
 import com.gincana.ui.theme.GincanaTheme
 import com.gincana.viewModel.LoginViewModel
@@ -38,7 +41,7 @@ class MainActivity : ComponentActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == 1) {
-            val viewModel = LoginViewModel()
+            val viewModel: LoginViewModel by viewModels()
             val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
             viewModel.finishLogIn(task)
         }

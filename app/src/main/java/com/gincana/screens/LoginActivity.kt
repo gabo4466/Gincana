@@ -3,6 +3,7 @@ package com.gincana
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import androidx.activity.viewModels
 import android.nfc.Tag
 import android.util.Log
 import androidx.compose.foundation.layout.*
@@ -11,12 +12,14 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.gincana.R
@@ -31,19 +34,24 @@ import com.gincana.viewModel.LoginViewModel
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun LoginScreen(navController: NavController) {
-    val viewModel: LoginViewModel = LoginViewModel()
+    val activity = LocalContext.current as MainActivity
+    val viewModel: LoginViewModel by activity.viewModels()
+    val logged by viewModel.logged().observeAsState(false)
+    if (logged){
+        navController.navigate("home_screen")
+    }
     Scaffold(
         topBar = { Title(title = "Inicio de sesión o registro", navController = navController) },
         modifier = Modifier.fillMaxSize()
     ) {
-        LoginForm(navController, viewModel)
+        LoginForm(navController, viewModel, activity)
     }
 }
 
 
 @Composable
-fun LoginForm(navController: NavController, viewModel: LoginViewModel) {
-    val activity = LocalContext.current as Activity
+fun LoginForm(navController: NavController, viewModel: LoginViewModel, activity: MainActivity) {
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -73,21 +81,9 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel) {
         Spacer(modifier = Modifier.size(20.dp))
 
         ButtonAccces("Acceder") {
-            if (!checkisEmpty(*arrayOf(email, password))) {
-                if (validateUser(email, password)) {
-                    navController.navigate("home_screen")
-                } else {
-
-                    error = "Correo electrónico o contraseña incorrectos"
-                    hidden = false
-                    Log.d("error:", error)
-                }
-
-            } else {
-                error = "Debes rellenar todos los campos"
-                hidden = false
-                Log.d("error:", error)
-            }
+            /*
+            TODO: Loguear por mail
+             */
         }
 
         ButtonAccces("Acceder con Google") {
@@ -136,31 +132,4 @@ fun LonginPreview() {
 }
 
 
-fun checkisEmpty(vararg inputs: String): Boolean {
-    var empty: Boolean = false
-    var contador: Int = 0
-    Log.d("Funcion checkinputs", "ENTRO VAMOS ARGENTINA VAMOS MESSI CARAJO")
-    while (contador < inputs.size && !empty) {
-        Log.d("Input", inputs[contador])
-        if (inputs[contador].isEmpty()) {
-            empty = true
-            Log.d("EMPTYINPUT", inputs[contador])
-        }
-        contador++
-    }
-
-    return empty
-}
-
-
-fun validateUser(email: String, password: String): Boolean {
-    var valid: Boolean = false
-    //TODO: hacer peticion a la base de datos
-    val fakeEmail: String = "pepe@gmail.com"
-    val fakePassword: String = "12345"
-    if (email == fakeEmail && password == fakePassword) {
-        valid = true
-    }
-    return valid
-}
 
