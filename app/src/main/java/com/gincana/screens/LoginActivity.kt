@@ -37,8 +37,12 @@ fun LoginScreen(navController: NavController) {
     val activity = LocalContext.current as MainActivity
     val viewModel: LoginViewModel by activity.viewModels()
     val logged by viewModel.logged().observeAsState(false)
+    val email by viewModel.email().observeAsState("")
     if (logged){
-        navController.navigate("home_screen")
+        Log.d("BUGHOME", "RECARGA")
+        PopUpLogin(email) {
+            navController.navigate("home_screen")
+        }
     }
     Scaffold(
         topBar = { Title(title = "Inicio de sesión o registro", navController = navController) },
@@ -51,7 +55,7 @@ fun LoginScreen(navController: NavController) {
 
 @Composable
 fun LoginForm(navController: NavController, viewModel: LoginViewModel, activity: MainActivity) {
-
+    val isLoading by viewModel.isLoading().observeAsState(false)
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -89,6 +93,9 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel, activity:
         ButtonAccces("Acceder con Google") {
             viewModel.logInWithGoogle(activity)
         }
+        if (isLoading){
+            CircularProgressIndicator()
+        }
     }
 }
 
@@ -113,6 +120,26 @@ fun ForgottenPasword(navController: NavController) {
         TextButton(onClick = {/* navController.navigate() TODO*/ }) { Text(text = "¿Has olvidado tu contraseña?") }
 
     }
+}
+
+@Composable
+fun PopUpLogin(name: String, onDismiss: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        text= {
+            Text(
+                text = "Has iniciado sesión con el email $name",
+                style = MaterialTheme.typography.body1,
+                color = MaterialTheme.colors.onSurface
+            )
+        },
+        confirmButton = {
+            TextButton(onClick = onDismiss) {
+                Text(text = "Continuar")
+            }
+        },
+        backgroundColor = MaterialTheme.colors.surface
+    )
 }
 
 
