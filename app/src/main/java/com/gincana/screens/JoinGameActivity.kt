@@ -1,5 +1,6 @@
 package com.gincana.screens
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -19,11 +20,14 @@ import com.gincana.common.composables.Title
 import com.gincana.ui.theme.GincanaTheme
 
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun JoinGameScreen(navController: NavController) {
 
-    Scaffold(topBar = { Title(title ="Unirse a una partida" , navController = navController)}, bottomBar = {
-        BottomNav(navController = navController) },
+    Scaffold(topBar = { Title(title = "Unirse a una partida", navController = navController) },
+        bottomBar = {
+            BottomNav(navController = navController)
+        },
         modifier = Modifier.fillMaxSize()
     ) {
         JoinGameBody(navController)
@@ -32,8 +36,8 @@ fun JoinGameScreen(navController: NavController) {
 }
 
 @Composable
-fun JoinGameBody(navControler: NavController){
-    Column (
+fun JoinGameBody(navControler: NavController) {
+    Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
         modifier = Modifier
@@ -42,7 +46,7 @@ fun JoinGameBody(navControler: NavController){
         var gameCode by remember { mutableStateOf("") }
 
         TextInputIcon(gameCode, {
-            if (it.length == 4) gameCode = it 
+            if (it.length == 4) gameCode = it
         }, "Código de partida", imageVector = Icons.Default.Info)
 
         Spacer(modifier = Modifier.size(20.dp))
@@ -52,7 +56,7 @@ fun JoinGameBody(navControler: NavController){
 }
 
 @Composable
-fun ButtonAccces(text:String, onClick: ()->Unit) {
+fun ButtonAccces(text: String, onClick: () -> Unit) {
 
     Button(
         onClick = onClick, modifier = Modifier.width(350.dp)
