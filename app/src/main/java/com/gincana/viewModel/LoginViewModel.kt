@@ -17,9 +17,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel() : ViewModel() {
     private val isLoading = MutableLiveData(false)
     private val hasErrors = MutableLiveData(false)
+    private val logged = MutableLiveData(false)
+    fun logged(): LiveData<Boolean> = logged
     fun isLoading(): LiveData<Boolean> = isLoading
     fun hasErrors(): LiveData<Boolean> = hasErrors
 
@@ -48,6 +50,7 @@ class LoginViewModel : ViewModel() {
                         if (it.isSuccessful){
                             val user = auth.currentUser
                             Log.d("Login", "${user?.displayName}")
+                            logged.postValue(true)
                         }else {
                             hasErrors.postValue(true)
                         }

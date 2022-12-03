@@ -24,6 +24,7 @@ import com.gincana.common.composables.ErrorText
 import com.gincana.common.composables.PasswordField
 import com.gincana.common.composables.TextInputIcon
 import com.gincana.common.composables.Title
+import com.gincana.model.Validate
 import com.gincana.ui.theme.GincanaTheme
 
 
@@ -59,6 +60,7 @@ fun SignUpForm(navController: NavController) {
     var repeatPassword by remember { mutableStateOf("") }
     var hidden by remember { mutableStateOf(true) }
     var error by remember { mutableStateOf("") }
+    val validate = Validate()
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -85,7 +87,7 @@ fun SignUpForm(navController: NavController) {
         ErrorText(text = error, hidden)
         Spacer(modifier = Modifier.size(20.dp))
         ButtonSignUp(text = "Registrarse") {
-            if (!checkisEmpty(*arrayOf(email, password))) {
+            if (!validate.checkisEmpty(*arrayOf(email, password))) {
 
                 navController.navigate("home_screen")
             } else {
