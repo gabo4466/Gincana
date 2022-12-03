@@ -2,6 +2,7 @@ package com.gincana
 
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.nfc.Tag
 import android.util.Log
 import androidx.compose.foundation.layout.*
@@ -12,6 +13,7 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -24,23 +26,24 @@ import com.gincana.common.composables.PasswordField
 import com.gincana.common.composables.TextInputIcon
 import com.gincana.common.composables.Title
 import com.gincana.ui.theme.GincanaTheme
+import com.gincana.viewModel.LoginViewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun LoginScreen(navController: NavController) {
-
+    val viewModel: LoginViewModel = LoginViewModel()
     Scaffold(
         topBar = { Title(title = "Inicio de sesión o registro", navController = navController) },
         modifier = Modifier.fillMaxSize()
     ) {
-        LoginForm(navController)
-
+        LoginForm(navController, viewModel)
     }
 }
 
 
 @Composable
-fun LoginForm(navController: NavController) {
+fun LoginForm(navController: NavController, viewModel: LoginViewModel) {
+    val activity = LocalContext.current as Activity
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -85,6 +88,10 @@ fun LoginForm(navController: NavController) {
                 hidden = false
                 Log.d("error:", error)
             }
+        }
+
+        ButtonAccces("Acceder con Google") {
+            viewModel.logInWithGoogle(activity)
         }
     }
 }
