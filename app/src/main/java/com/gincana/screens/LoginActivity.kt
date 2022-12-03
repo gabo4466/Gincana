@@ -1,6 +1,8 @@
 package com.gincana
 
-import androidx.compose.foundation.clickable
+
+import android.nfc.Tag
+import android.util.Log
 import androidx.compose.foundation.layout.*
 
 import androidx.compose.material.*
@@ -9,13 +11,7 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.text.style.TextAlign
+
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -65,22 +61,54 @@ import com.gincana.ui.theme.GincanaTheme
                 .fillMaxSize()
                 .padding(top = 100.dp)
         ) {
-            TextInputIcon(text = "Correo Electrónico", imageVector =Icons.Default.Email )
+            var password by remember { mutableStateOf("") }
+            var email by remember { mutableStateOf("") }
+            var error by remember { mutableStateOf("") }
+            var hidden by remember { mutableStateOf(true) }
 
+            TextInputIcon(email,{ email = it },label = "Correo Electrónico", imageVector =Icons.Default.Email )
+            
             Spacer(modifier = Modifier.size(20.dp))
 
-            PasswordField("Contraseña")
-
+            PasswordField(password,{password= it},"Contraseña")
+            ErrorText(text = error,hidden)
             Spacer(modifier = Modifier.size(20.dp))
 
             ForgottenPasword(navController)
 
             Spacer(modifier = Modifier.size(20.dp))
 
-            ButtonAccces("Acceder") { navController.navigate("home_screen") }
+            ButtonAccces("Acceder") { if(!CheckisEmpty(*arrayOf(email,password))) {
+                error="Debes rellenar todos los campos"
+                hidden=false
+            } else if(!ValidateUser(email,password)){
+            error="Correo electrónico o contraseña incorrectos"
+            hidden=false
+                }else{
+            navController.navigate("home_screen")
+        }}
+             /*   if(!ValidateUser(email,password)){
+                    error="Correo electrónico o contraseña incorrectos"
+                    hidden=false
+                    Log.d("error:",error)
+                }else{
+                    navController.navigate("home_screen")
+                }
+
+            }else{
+                error="Debes rellenar todos los campos"
+                hidden=false}
+
+            }*/
         }
     }
 
+    @Composable
+    fun ErrorText(text:String,hidden: Boolean=true){
+        if(!hidden){
+            Text(text = text, color = MaterialTheme.colors.error)
+        }
+    }
 
     @Composable
     fun ButtonAccces(text:String, onClick: ()->Unit) {
@@ -208,4 +236,31 @@ import com.gincana.ui.theme.GincanaTheme
         }
     }
 
+
+
+    private fun CheckisEmpty(vararg inputs: String): Boolean {
+        var valid:Boolean = false
+        var contador: Int=0
+
+        while(contador<inputs.size && valid){
+            if (inputs.get(contador).isEmpty()) {
+                valid = false
+            }
+            contador++
+        }
+
+        return valid
+    }
+
+
+private fun ValidateUser(email:String,password:String): Boolean{
+    var valid : Boolean= false
+    //TODO: hacer peticion a la base de datos
+    val fakeEmail:String="pepe@gmail.com"
+    val fakePassword:String="12345"
+    if(email==(fakeEmail) && password==(fakePassword) ){
+        valid=true
+    }
+    return valid
+}
 
