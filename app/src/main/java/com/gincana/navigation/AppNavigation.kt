@@ -7,29 +7,33 @@ import androidx.navigation.compose.rememberNavController
 
 import com.gincana.LoginScreen
 import com.gincana.SignUpScreen
+import com.gincana.screens.AccountSettingsScreen
 import com.gincana.screens.AuthScreen
 import com.gincana.screens.HomeScreen
 import com.gincana.screens.JoinGameScreen
 
 
 @Composable
-fun AppNavigation(){
+fun AppNavigation() {
     val navController = rememberNavController()
-    NavHost(navController = navController , startDestination = AppScreens.AuthScreen.route ){
-        composable(route= AppScreens.AuthScreen.route){
+    NavHost(navController = navController, startDestination = AppScreens.AuthScreen.route) {
+        composable(route = AppScreens.AuthScreen.route) {
             AuthScreen(navController)
         }
-        composable(route= AppScreens.LoginScreen.route){
+        composable(route = AppScreens.LoginScreen.route) {
             LoginScreen(navController)
         }
-        composable(route= AppScreens.SignUpScreen.route){
+        composable(route = AppScreens.SignUpScreen.route) {
             SignUpScreen(navController)
         }
-        composable(route= AppScreens.HomeScreen.route){
+        composable(route = AppScreens.HomeScreen.route) {
             HomeScreen(navController)
         }
-        composable(route= AppScreens.JoinGameScreen.route){
+        composable(route = AppScreens.JoinGameScreen.route) {
             JoinGameScreen(navController)
+        }
+        composable(route = AppScreens.AccountSettingsScreen.route) {
+            AccountSettingsScreen(navController)
         }
     }
 }

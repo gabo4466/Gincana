@@ -14,10 +14,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
 @Composable
-fun Title(title: String,navController: NavController,backbutton:Boolean= true) {
-    TopAppBar(){
+fun Title(title: String, navController: NavController, backbutton: Boolean = true) {
+    TopAppBar {
 
-        if(backbutton) {
+        if (backbutton) {
             Icon(
                 imageVector = Icons.Default.ArrowBack,
                 contentDescription = "Arrow Back",
@@ -34,7 +34,6 @@ fun Title(title: String,navController: NavController,backbutton:Boolean= true) {
         )
 
     }
-
 
 
 }

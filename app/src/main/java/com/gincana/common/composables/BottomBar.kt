@@ -1,11 +1,15 @@
 package com.gincana.common.composables
 
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -46,44 +50,46 @@ fun BottomNav(navController: NavController) {
     val currentRoute = navBackStackEntry?.destination
     val items = listOf(
         AppScreens.HomeScreen,
-        AppScreens.AuthScreen
+        AppScreens.AccountSettingsScreen
 
 
     )
     BottomAppBar(cutoutShape = CircleShape) {
-        Row() {
+        Row(
+            modifier = Modifier.padding(10.dp)
+        ) {
             items.forEachIndexed { index, it ->
                 //if (index != 2) {
-                    // Main item
-                    BottomNavigationItem(
-                        icon = {
-                            it.icon?.let {
-                                Icon(
-                                    imageVector = it,
-                                    contentDescription = "",
-                                   // modifier = Modifier.size(35.dp),
-                                    tint = Color.White
+                // Main item
+                BottomNavigationItem(
+                    icon = {
+                        it.icon?.let {
+                            Icon(
+                                imageVector = it,
+                                contentDescription = "",
+                                modifier = Modifier.size(35.dp),
+                                tint = Color.White
 
-                                )
-                            }
-                        },
-                        label = {
-                            "Hola"
-                        },
-                        selected = currentRoute?.hierarchy?.any { it.route == it.route } == true,
-                       // selectedContentColor = Color(R.color.purple_700),
-                        unselectedContentColor = Color.White.copy(alpha = 0.4f),
-                        onClick = {navController.navigate(it.route)}
-                    )
+                            )
+                        }
+                    },
+                    label = {
+                        "Hola"
+                    },
+                    selected = currentRoute?.hierarchy?.any { it.route == it.route } == true,
+                    // selectedContentColor = Color(R.color.purple_700),
+                    unselectedContentColor = Color.White.copy(alpha = 0.4f),
+                    onClick = { navController.navigate(it.route) }
+                )
                 //} else {
-                    // placeholder for center fab
-                   /* BottomNavigationItem(
-                        icon = {},
-                        label = { },
-                        selected = false,
-                        onClick = { },
-                        enabled = false
-                    )*/
+                // placeholder for center fab
+                /* BottomNavigationItem(
+                     icon = {},
+                     label = { },
+                     selected = false,
+                     onClick = { },
+                     enabled = false
+                 )*/
                 //}
             }
         }

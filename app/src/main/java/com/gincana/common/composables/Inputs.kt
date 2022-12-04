@@ -22,7 +22,7 @@ import androidx.navigation.NavController
 import com.google.android.material.R
 
 @Composable
-fun PasswordField(password:String,onVAlueChange: (String)->Unit,label:String){
+fun PasswordField(password: String, onVAlueChange: (String) -> Unit, label: String) {
 
     var passwordVisibility by remember { mutableStateOf(false) }
 
@@ -32,11 +32,12 @@ fun PasswordField(password:String,onVAlueChange: (String)->Unit,label:String){
         painterResource(R.drawable.design_ic_visibility_off)
 
 
+
     OutlinedTextField(
 
         value = password,
         onValueChange = onVAlueChange,
-        label = { InputLabel(text =label , imageVector =Icons.Default.Lock ) },
+        label = { InputLabel(text = label, imageVector = Icons.Default.Lock) },
         singleLine = true,
         /*CAMBIAR COLORES*/
         colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -64,11 +65,12 @@ fun PasswordField(password:String,onVAlueChange: (String)->Unit,label:String){
 }
 
 @Composable
-fun InputLabel(text:String,imageVector: ImageVector){
-    Row() {
+fun InputLabel(text: String, imageVector: ImageVector) {
+    Row {
         Icon(
             imageVector = imageVector,
-            contentDescription = "Arrow Back")
+            contentDescription = "Arrow Back"
+        )
         Spacer(modifier = Modifier.width(8.dp))
 
         Text(text = text)
@@ -76,15 +78,20 @@ fun InputLabel(text:String,imageVector: ImageVector){
 }
 
 
-
 @Composable
-fun TextInputIcon(text:String,onVAlueChange: (String) -> Unit,label:String,imageVector: ImageVector, modifier: Modifier = Modifier){
+fun TextInputIcon(
+    text: String,
+    onVAlueChange: (String) -> Unit,
+    label: String,
+    imageVector: ImageVector,
+    modifier: Modifier = Modifier
+) {
 
 
     OutlinedTextField(
         value = text,
         onValueChange = onVAlueChange,
-        label = { InputLabel(text = label, imageVector =imageVector ) },
+        label = { InputLabel(text = label, imageVector = imageVector) },
         singleLine = true,
         /*CAMBIAR  COLORES*/
         colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -94,6 +101,13 @@ fun TextInputIcon(text:String,onVAlueChange: (String) -> Unit,label:String,image
         modifier = modifier.width(350.dp)
 
     )
+}
+
+@Composable
+fun ErrorText(text: String, hidden: Boolean = true) {
+    if (!hidden) {
+        Text(text = text, color = MaterialTheme.colors.error)
+    }
 }
 
 
