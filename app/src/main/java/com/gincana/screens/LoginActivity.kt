@@ -3,6 +3,7 @@ package com.gincana
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.graphics.drawable.Icon
 import androidx.activity.viewModels
 import android.nfc.Tag
 import android.util.Log
@@ -15,7 +16,9 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -84,13 +87,13 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel, activity:
 
         Spacer(modifier = Modifier.size(20.dp))
 
-        ButtonAccces("Acceder") {
+        ButtonAccces(text = "Acceder", icon = null) {
             /*
             TODO: Loguear por mail
              */
         }
 
-        ButtonAccces("Acceder con Google") {
+        ButtonAccces(text = "Acceder con Google", icon = R.drawable.google_icon) {
             viewModel.logInWithGoogle(activity)
         }
         if (isLoading){
@@ -101,11 +104,16 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel, activity:
 
 
 @Composable
-fun ButtonAccces(text: String, onClick: () -> Unit) {
+fun ButtonAccces(text: String, icon: Int?, onClick: () -> Unit) {
 
     Button(
         onClick = onClick, modifier = Modifier.width(350.dp)
     ) {
+        if (icon != null){
+            Icon(painter =  painterResource(id = icon), contentDescription = "")
+            Spacer(modifier = Modifier.size(10.dp))
+        }
+        
         Text(
             text = text,
             style = MaterialTheme.typography.button
