@@ -38,28 +38,6 @@ fun HomeScreen(navController: NavController) {
 }
 
 @Composable
-fun BottomBar() {
-    BottomAppBar {
-
-        BottomNavigationItem(
-            icon = { Icon(Icons.Default.Person, contentDescription = "item.title") },
-            label = {
-                Text(
-                    text = "item.title",
-                    fontSize = 9.sp
-                )
-            },
-            selectedContentColor = Color.Black,
-            unselectedContentColor = Color.Black.copy(0.4f),
-            alwaysShowLabel = true,
-            selected = true,
-            onClick = {}
-        )
-
-    }
-}
-
-@Composable
 fun BodyHome(navController: NavController) {
     val auth = FirebaseAuth.getInstance()
     Column(
@@ -69,11 +47,8 @@ fun BodyHome(navController: NavController) {
             .fillMaxSize()
     ) {
 
-
-        /* ButtonHome(text ="Crear partida" ) {
-
-         }*/
-        auth.currentUser?.displayName?.let { Text(text = it) }
+        auth.currentUser?.displayName?.let { Text(text = "Bienvenido "+it) }
+        Spacer(modifier = Modifier.size(30.dp))
         ButtonHome(text = "Unirse a partida") {
 
         }
@@ -84,18 +59,15 @@ fun BodyHome(navController: NavController) {
 fun ButtonHome(text: String, onClick: () -> Unit) {
 
     Button(
-        onClick = onClick, modifier = Modifier.width(350.dp)
+        onClick = onClick, modifier = Modifier
+            .width(350.dp)
+            .size(50.dp)
     ) {
         Text(
             text = text,
             style = MaterialTheme.typography.button
         )
     }
-}
-
-@Composable
-fun HomeButtons(navController: NavController) {
-
 }
 
 @Preview(showBackground = true)
