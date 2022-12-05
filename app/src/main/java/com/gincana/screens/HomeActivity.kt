@@ -20,6 +20,7 @@ import androidx.navigation.compose.rememberNavController
 import com.gincana.common.composables.BottomNav
 import com.gincana.common.composables.Title
 import com.gincana.ui.theme.GincanaTheme
+import com.google.firebase.auth.FirebaseAuth
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -60,6 +61,7 @@ fun BottomBar() {
 
 @Composable
 fun BodyHome(navController: NavController) {
+    val auth = FirebaseAuth.getInstance()
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -71,6 +73,7 @@ fun BodyHome(navController: NavController) {
         /* ButtonHome(text ="Crear partida" ) {
 
          }*/
+        auth.currentUser?.displayName?.let { Text(text = it) }
         ButtonHome(text = "Unirse a partida") {
 
         }

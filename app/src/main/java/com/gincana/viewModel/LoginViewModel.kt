@@ -19,13 +19,15 @@ import com.google.firebase.auth.GoogleAuthProvider
 
 class LoginViewModel() : ViewModel() {
     private val isLoading = MutableLiveData(false)
-    private val hasErrors = MutableLiveData(false)
+    private val hasGoogleError = MutableLiveData(false)
+    private val googleError = MutableLiveData("")
     private val logged = MutableLiveData(false)
     private val email = MutableLiveData("")
     fun email(): LiveData<String> = email
     fun logged(): LiveData<Boolean> = logged
     fun isLoading(): LiveData<Boolean> = isLoading
-    fun hasErrors(): LiveData<Boolean> = hasErrors
+    fun googleError(): LiveData<String> = googleError
+    fun hasGoogleError(): LiveData<Boolean> = hasGoogleError
 
     fun logInWithGoogle(activity: Activity) {
         isLoading.postValue(true)
@@ -49,18 +51,21 @@ class LoginViewModel() : ViewModel() {
                 val credential = GoogleAuthProvider.getCredential(token, null)
                 auth.signInWithCredential(credential)
                     .addOnCompleteListener{
-                        if (it.isSuccessful){
+                        if (it.isSuccessful) {
+
                             val user = auth.currentUser
                             logged.postValue(true)
                             email.postValue(user?.email)
                         }else {
-                            hasErrors.postValue(true)
+                            hasGoogleError.postValue(true)
+                            googleError.postValue("Ha ocurrido un error al iniciar sesión")
                         }
                         isLoading.postValue(false)
                     }
             }
         } catch (e: ApiException) {
-            hasErrors.postValue(true)
+            hasGoogleError.postValue(true)
+            googleError.postValue("Ha ocurrido algún error")
             isLoading.postValue(false)
             e.message?.let { Log.d("Login", "error: "+it) }
 

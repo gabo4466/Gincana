@@ -13,7 +13,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.gincana.ButtonAccces
 import com.gincana.common.composables.BottomNav
 import com.gincana.common.composables.TextInputIcon
 import com.gincana.common.composables.Title

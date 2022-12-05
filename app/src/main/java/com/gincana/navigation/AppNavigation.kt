@@ -5,7 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 
-import com.gincana.LoginScreen
+import com.gincana.screens.LoginScreen
 import com.gincana.SignUpScreen
 import com.gincana.screens.AccountSettingsScreen
 import com.gincana.screens.AuthScreen
