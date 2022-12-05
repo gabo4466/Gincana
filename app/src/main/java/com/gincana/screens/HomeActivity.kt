@@ -50,7 +50,7 @@ fun BodyHome(navController: NavController) {
         auth.currentUser?.displayName?.let { Text(text = "Bienvenido "+it) }
         Spacer(modifier = Modifier.size(30.dp))
         ButtonHome(text = "Unirse a partida") {
-
+            navController.navigate("joingame_screen")
         }
     }
 }
@@ -61,7 +61,6 @@ fun ButtonHome(text: String, onClick: () -> Unit) {
     Button(
         onClick = onClick, modifier = Modifier
             .width(350.dp)
-            .size(50.dp)
     ) {
         Text(
             text = text,
