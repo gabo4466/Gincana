@@ -26,15 +26,16 @@ import com.gincana.common.composables.PasswordField
 import com.gincana.common.composables.TextInputIcon
 import com.gincana.common.composables.Title
 import com.gincana.viewModel.LoginViewModel
+import com.google.firebase.auth.FirebaseAuth
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun LoginScreen(navController: NavController) {
     val activity = LocalContext.current as MainActivity
     val viewModel: LoginViewModel by activity.viewModels()
-    val logged by viewModel.logged().observeAsState(false)
     val email by viewModel.email().observeAsState("")
-    if (logged){
+    val auth = FirebaseAuth.getInstance()
+    if (auth.currentUser != null) {
         PopUpLogin(email) {
             navController.navigate("home_screen")
         }
@@ -59,33 +60,33 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel, activity:
             .fillMaxSize()
             .padding(top = 100.dp)
     ) {
-//        var password by remember { mutableStateOf("") }
-//        var email by remember { mutableStateOf("") }
-//        var error by remember { mutableStateOf("") }
-//        var hidden by remember { mutableStateOf(true) }
-//
-//        TextInputIcon(
-//            email,
-//            { email = it },
-//            label = "Correo Electrónico",
-//            imageVector = Icons.Default.Email
-//        )
-//
-//        Spacer(modifier = Modifier.size(20.dp))
-//
-//        PasswordField(password, { password = it }, "Contraseña")
-//        ErrorText(text = error, hidden)
-//        Spacer(modifier = Modifier.size(20.dp))
-//
-//        ForgottenPasword(navController)
-//
-//        Spacer(modifier = Modifier.size(20.dp))
-//
-//        ButtonAccces(text = "Acceder", icon = null) {
-//            /*
-//            TODO: Loguear por mail
-//             */
-//        }
+        var password by remember { mutableStateOf("") }
+        var email by remember { mutableStateOf("") }
+        var error by remember { mutableStateOf("") }
+        var hidden by remember { mutableStateOf(true) }
+
+        TextInputIcon(
+            email,
+            { email = it },
+            label = "Correo Electrónico",
+            imageVector = Icons.Default.Email
+        )
+
+        Spacer(modifier = Modifier.size(20.dp))
+
+        PasswordField(password, { password = it }, "Contraseña")
+        ErrorText(text = error, hidden)
+        Spacer(modifier = Modifier.size(20.dp))
+
+        ForgottenPasword(navController)
+
+        Spacer(modifier = Modifier.size(20.dp))
+
+        ButtonAccces(text = "Acceder", icon = null) {
+            /*
+            TODO: Loguear por mail
+             */
+        }
 
         ButtonAccces(text = "Acceder con Google", icon = R.drawable.google_icon) {
             viewModel.logInWithGoogle(activity)
@@ -152,20 +153,7 @@ fun PopUpLogin(name: String, onDismiss: () -> Unit) {
 }
 
 
-//@Preview(showBackground = true)
-//@Composable
-//fun LonginPreview() {
-//    GincanaTheme {
-//        // A surface container using the 'background' color from the theme
-//        Surface(
-//            modifier = Modifier.fillMaxSize(),
-//            color = MaterialTheme.colors.background
-//        ) {
-//            val navController = rememberNavController()
-//            LoginScreen(navController)
-//        }
-//    }
-//}
+
 
 
 

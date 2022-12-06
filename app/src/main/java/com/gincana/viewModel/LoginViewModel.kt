@@ -21,10 +21,8 @@ class LoginViewModel() : ViewModel() {
     private val isLoading = MutableLiveData(false)
     private val hasGoogleError = MutableLiveData(false)
     private val googleError = MutableLiveData("")
-    private val logged = MutableLiveData(false)
     private val email = MutableLiveData("")
     fun email(): LiveData<String> = email
-    fun logged(): LiveData<Boolean> = logged
     fun isLoading(): LiveData<Boolean> = isLoading
     fun googleError(): LiveData<String> = googleError
     fun hasGoogleError(): LiveData<Boolean> = hasGoogleError
@@ -52,9 +50,7 @@ class LoginViewModel() : ViewModel() {
                 auth.signInWithCredential(credential)
                     .addOnCompleteListener{
                         if (it.isSuccessful) {
-
                             val user = auth.currentUser
-                            logged.postValue(true)
                             email.postValue(user?.email)
                         }else {
                             hasGoogleError.postValue(true)
