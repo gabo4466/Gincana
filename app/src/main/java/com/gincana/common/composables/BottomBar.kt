@@ -15,35 +15,6 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.gincana.navigation.AppScreens
 
-
-/*
-@Composable
-fun BottomBarWithFabDem() {
-    val navController = rememberNavController()
-    Scaffold(
-        bottomBar = {
-            BottomNav(navController)
-        },
-        floatingActionButtonPosition = FabPosition.Center,
-        isFloatingActionButtonDocked = true,
-        floatingActionButton = {
-            FloatingActionButton(
-                shape = CircleShape,
-                onClick = {
-                },
-                contentColor = Color.White
-            ) {
-                Icon(imageVector = Icons.Filled.Add, contentDescription = "Add icon")
-            }
-        }
-    ) {
-        
-    }
-}
-
-*/
-
-
 @Composable
 fun BottomNav(navController: NavController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -73,24 +44,11 @@ fun BottomNav(navController: NavController) {
                             )
                         }
                     },
-                    label = {
-                        "Hola"
-                    },
-                    selected = currentRoute?.hierarchy?.any { it.route == it.route } == true,
+                    selected = currentRoute?.hierarchy?.any { it.route == navController.currentBackStackEntry?.destination?.route } == true,
                     // selectedContentColor = Color(R.color.purple_700),
                     unselectedContentColor = Color.White.copy(alpha = 0.4f),
                     onClick = { navController.navigate(it.route) }
                 )
-                //} else {
-                // placeholder for center fab
-                /* BottomNavigationItem(
-                     icon = {},
-                     label = { },
-                     selected = false,
-                     onClick = { },
-                     enabled = false
-                 )*/
-                //}
             }
         }
 
