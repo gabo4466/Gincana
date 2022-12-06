@@ -25,7 +25,7 @@ import com.google.android.material.R
 fun LobbyScreen(navController: NavController) {
 
     Scaffold(
-        topBar = { Title(title = "Esperando...", navController = navController, false) },
+        topBar = { Title(title = "Ver Participantes", navController = navController, false) },
 
         modifier = Modifier.fillMaxSize()
     
@@ -83,7 +83,7 @@ fun ButtonLeave(text: String, icon: Int?, onClick: () -> Unit) {
 
 @Preview(showBackground = true)
 @Composable
-fun LonginPreview() {
+fun LobbyPreview() {
     GincanaTheme {
         // A surface container using the 'background' color from the theme
         Surface(
