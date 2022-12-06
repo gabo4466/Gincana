@@ -14,20 +14,30 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 
 
 class LoginViewModel() : ViewModel() {
     private val isLoading = MutableLiveData(false)
+    private val logged = MutableLiveData(false)
     private val hasGoogleError = MutableLiveData(false)
     private val googleError = MutableLiveData("")
     private val email = MutableLiveData("")
-    fun email(): LiveData<String> = email
+    private val loggedUser = MutableLiveData(FirebaseAuth.getInstance().currentUser)
+    fun loggedUser(): MutableLiveData<FirebaseUser?> = loggedUser
     fun isLoading(): LiveData<Boolean> = isLoading
+    fun logged(): LiveData<Boolean> = logged
     fun googleError(): LiveData<String> = googleError
     fun hasGoogleError(): LiveData<Boolean> = hasGoogleError
 
+    fun logIn() {
+        logged.postValue(true)
+    }
+
     fun logInWithGoogle(activity: Activity) {
+        logged.postValue(false)
+        loggedUser.postValue(null)
         isLoading.postValue(true)
         val gso: GoogleSignInOptions =
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -52,6 +62,7 @@ class LoginViewModel() : ViewModel() {
                         if (it.isSuccessful) {
                             val user = auth.currentUser
                             email.postValue(user?.email)
+                            loggedUser.postValue(auth.currentUser)
                         }else {
                             hasGoogleError.postValue(true)
                             googleError.postValue("Ha ocurrido un error al iniciar sesión")

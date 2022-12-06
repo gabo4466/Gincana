@@ -33,11 +33,15 @@ import com.google.firebase.auth.FirebaseAuth
 fun LoginScreen(navController: NavController) {
     val activity = LocalContext.current as MainActivity
     val viewModel: LoginViewModel by activity.viewModels()
-    val email by viewModel.email().observeAsState("")
-    val auth = FirebaseAuth.getInstance()
-    if (auth.currentUser != null) {
-        PopUpLogin(email) {
-            navController.navigate("home_screen")
+    val loggedUser by viewModel.loggedUser().observeAsState(null)
+    val logged by viewModel.logged().observeAsState(false)
+    if (loggedUser != null && !logged) {
+        loggedUser!!.displayName?.let {
+            PopUpLogin(it) {
+                viewModel.logIn()
+                navController.navigate("home_screen")
+
+            }
         }
     }
     Scaffold(
@@ -57,8 +61,8 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel, activity:
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .fillMaxSize()
-            .padding(top = 100.dp)
+                .fillMaxSize()
+                .padding(top = 100.dp)
     ) {
         var password by remember { mutableStateOf("") }
         var email by remember { mutableStateOf("") }
@@ -138,7 +142,7 @@ fun PopUpLogin(name: String, onDismiss: () -> Unit) {
         onDismissRequest = onDismiss,
         text= {
             Text(
-                text = "Has iniciado sesión con el email $name",
+                text = name,
                 style = MaterialTheme.typography.body1,
                 color = MaterialTheme.colors.onSurface
             )
