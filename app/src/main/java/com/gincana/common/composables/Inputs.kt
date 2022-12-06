@@ -35,31 +35,31 @@ fun PasswordField(password: String, onVAlueChange: (String) -> Unit, label: Stri
 
     OutlinedTextField(
 
-        value = password,
-        onValueChange = onVAlueChange,
-        label = { InputLabel(text = label, imageVector = Icons.Default.Lock) },
-        singleLine = true,
-        /*CAMBIAR COLORES*/
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = Color.Magenta,
-            unfocusedBorderColor = Color.Blue,
+            value = password,
+            onValueChange = onVAlueChange,
+            label = { InputLabel(text = label, imageVector = Icons.Default.Lock) },
+            singleLine = true,
+            /*CAMBIAR COLORES*/
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = MaterialTheme.colors.secondary,
+                    unfocusedBorderColor = MaterialTheme.colors.primary,
 
-            ),
+                    ),
 
-        trailingIcon = {
-            IconButton(onClick = {
-                passwordVisibility = !passwordVisibility
-            }) {
-                Icon(
-                    painter = icon,
-                    contentDescription = "Visibility Icon"
-                )
-            }
-        },
-        visualTransformation = if (passwordVisibility) VisualTransformation.None
-        else PasswordVisualTransformation(),
+            trailingIcon = {
+                IconButton(onClick = {
+                    passwordVisibility = !passwordVisibility
+                }) {
+                    Icon(
+                            painter = icon,
+                            contentDescription = "Visibility Icon"
+                    )
+                }
+            },
+            visualTransformation = if (passwordVisibility) VisualTransformation.None
+            else PasswordVisualTransformation(),
 
-        modifier = Modifier.width(350.dp)
+            modifier = Modifier.width(350.dp)
 
     )
 }
@@ -68,8 +68,8 @@ fun PasswordField(password: String, onVAlueChange: (String) -> Unit, label: Stri
 fun InputLabel(text: String, imageVector: ImageVector) {
     Row {
         Icon(
-            imageVector = imageVector,
-            contentDescription = "Arrow Back"
+                imageVector = imageVector,
+                contentDescription = "Arrow Back"
         )
         Spacer(modifier = Modifier.width(8.dp))
 
@@ -80,25 +80,25 @@ fun InputLabel(text: String, imageVector: ImageVector) {
 
 @Composable
 fun TextInputIcon(
-    text: String,
-    onVAlueChange: (String) -> Unit,
-    label: String,
-    imageVector: ImageVector,
-    modifier: Modifier = Modifier
+        text: String,
+        onVAlueChange: (String) -> Unit,
+        label: String,
+        imageVector: ImageVector,
+        modifier: Modifier = Modifier
 ) {
 
 
     OutlinedTextField(
-        value = text,
-        onValueChange = onVAlueChange,
-        label = { InputLabel(text = label, imageVector = imageVector) },
-        singleLine = true,
-        /*CAMBIAR  COLORES*/
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = Color.Magenta,
-            unfocusedBorderColor = Color.Blue
-        ),
-        modifier = modifier.width(350.dp)
+            value = text,
+            onValueChange = onVAlueChange,
+            label = { InputLabel(text = label, imageVector = imageVector) },
+            singleLine = true,
+            /*CAMBIAR  COLORES*/
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = MaterialTheme.colors.secondary,
+                    unfocusedBorderColor = MaterialTheme.colors.primary,
+            ),
+            modifier = modifier.width(350.dp)
 
     )
 }

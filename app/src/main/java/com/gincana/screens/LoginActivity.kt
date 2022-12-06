@@ -1,12 +1,8 @@
-package com.gincana
+package com.gincana.screens
 
 
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.graphics.drawable.Icon
 import androidx.activity.viewModels
-import android.nfc.Tag
-import android.util.Log
 import androidx.compose.foundation.layout.*
 
 import androidx.compose.material.*
@@ -16,33 +12,30 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
+import com.gincana.MainActivity
 import com.gincana.R
 import com.gincana.common.composables.ErrorText
 
 import com.gincana.common.composables.PasswordField
 import com.gincana.common.composables.TextInputIcon
 import com.gincana.common.composables.Title
-import com.gincana.ui.theme.GincanaTheme
 import com.gincana.viewModel.LoginViewModel
+import com.google.firebase.auth.FirebaseAuth
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun LoginScreen(navController: NavController) {
     val activity = LocalContext.current as MainActivity
     val viewModel: LoginViewModel by activity.viewModels()
-    val logged by viewModel.logged().observeAsState(false)
     val email by viewModel.email().observeAsState("")
-    if (logged){
-        Log.d("BUGHOME", "RECARGA")
+    val auth = FirebaseAuth.getInstance()
+    if (auth.currentUser != null) {
         PopUpLogin(email) {
             navController.navigate("home_screen")
         }
@@ -59,6 +52,8 @@ fun LoginScreen(navController: NavController) {
 @Composable
 fun LoginForm(navController: NavController, viewModel: LoginViewModel, activity: MainActivity) {
     val isLoading by viewModel.isLoading().observeAsState(false)
+    val googleError by viewModel.googleError().observeAsState("")
+    val hasGoogleError by viewModel.hasGoogleError().observeAsState(false)
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -96,6 +91,13 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel, activity:
         ButtonAccces(text = "Acceder con Google", icon = R.drawable.google_icon) {
             viewModel.logInWithGoogle(activity)
         }
+
+        // ERROR TEXT
+        if (hasGoogleError){
+            Spacer(modifier = Modifier.size(20.dp))
+            Text(text = googleError, color = Color.Red)
+        }
+
         if (isLoading){
             CircularProgressIndicator()
         }
@@ -151,20 +153,7 @@ fun PopUpLogin(name: String, onDismiss: () -> Unit) {
 }
 
 
-@Preview(showBackground = true)
-@Composable
-fun LonginPreview() {
-    GincanaTheme {
-        // A surface container using the 'background' color from the theme
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colors.background
-        ) {
-            val navController = rememberNavController()
-            LoginScreen(navController)
-        }
-    }
-}
+
 
 
 
